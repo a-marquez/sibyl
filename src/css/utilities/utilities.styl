@@ -1,0 +1,168 @@
+// alignment
+
+.text-left
+    text-align left
+
+.text-right
+    text-align right
+
+.text-center
+    text-align center
+
+.vertical-middle
+    vertical-align middle
+
+.vertical-sub
+    vertical-align sub
+
+.vertical-baseline
+    vertical-align baseline
+
+.float-left
+    float left
+
+.float-right
+    float right
+
+// display
+
+.absolute
+    position absolute
+
+.relative
+    position relative
+
+.inline-block
+    display inline-block
+
+.table
+    display table
+
+.table-row
+    display table-row
+
+.table-cell
+    display table-cell
+
+// flex
+
+.flex
+    display flex
+
+.flex-row
+    flex-direction row
+
+.flex-column
+    flex-direction column
+
+.flex-grow-1
+    flex-grow 1
+
+.flex-no-shrink
+    flex-shrink 0
+
+.flex-justify-around
+    justify-content space-around
+
+.flex-justify-around
+    justify-content space-around
+
+.flex-justify-between
+    justify-content space-between
+
+.flex-items-end
+    align-items flex-end
+
+// box model
+
+.border-box
+    box-sizing border-box
+
+.no-long, .no-top
+    top 0px
+
+.no-long, .no-bottom
+    bottom 0px
+
+.no-wide, .no-left
+    left 0px
+
+.no-wide, .no-right
+    right 0px
+
+.no-border-spacing
+    border-spacing 0
+
+for property in 'margin' 'padding'
+    .no-{property}
+       cardinal-generator(property, 0px)
+
+    .{property}
+        cardinal-generator(property, 1em)
+
+        &--small
+            cardinal-generator(property, .5em)
+
+// sizing
+
+.fill
+    &, &__long
+        height 100%
+    &, &__wide
+       width 100%
+
+    &--50p
+        &, &__long
+            height 50%
+        &, &__wide
+            width 50%
+
+// color
+
+.text-inherit-color
+    color inherit
+
+.feedback-outline-orange
+    &:hover, &:active, &:hover, &:focus
+        outline 1px solid orange
+
+for key, value in $colors
+    .text-{key}
+        color value
+
+    .back-{key}
+        background-color value
+
+// miscellaneous
+
+.clearfix
+    overflow auto
+
+.pointer
+    cursor pointer
+
+.no-wrap
+    white-space nowrap
+
+.no-border
+    border none
+
+.overflow-auto
+    overflow auto
+
+.overflow-visible
+    overflow visible
+
+.ellipsis
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+
+for key, value in $mqs
+    .mq-hide--{key}
+        @media value
+            display none
+
+for key, value in $z-indices
+    .z-index-{key}
+        z-index value

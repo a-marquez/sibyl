@@ -1,0 +1,49 @@
+doctype
+html
+  head
+    title Sibyl #{version}
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=Edge,chrome=1')
+    link(rel='stylesheet' href='./css/app.css')
+    link(rel='stylesheet' href='//js.arcgis.com/#{esriVersion}/esri/css/esri.css')
+    link(rel='stylesheet' href='//js.arcgis.com/#{esriVersion}/dijit/themes/claro/claro.css')
+
+    script.
+      var base = location.pathname.replace(/\/[^/]+$/, '')
+      var dojoConfig = {
+        parseOnLoad: false,
+        async: true,
+        cacheBust: 'v=#{version}',
+        packages: [
+          {name: 'js', location: base + 'js'},
+          {name: 'app', location: base + 'js/app'},
+          {name: 'map', location: base + 'js/map'},
+          {name: 'atoms', location: base + 'js/atoms'},
+          {name: 'components', location: base + 'js/components'},
+          {name: 'util', location: base + 'js/utils'},
+          {name: 'lib', location: base + 'lib'},
+          {name: 'shim', location: base + 'shim'},
+          {name: 'vendor', location: base + 'vendor'}
+        ],
+        aliases: [
+          ['alt', 'vendor/alt/dist/alt.min'],
+          ['alt-connect-to-stores', 'vendor/alt-connect-to-stores/dist/connectToStores.min'],
+          ['react', 'vendor/react/react.min'],
+          ['react-dom', 'vendor/react/react-dom.min'],
+          ['babel-polyfill', 'shim/babel-polyfill/browser-polyfill'],
+          ['fetch', 'shim/fetch/fetch']
+        ],
+        deps: ['dojo/domReady!'],
+        callback: function () {
+          window.app = {
+            env: '#{env}',
+            version: '#{version}',
+            esriVersion: '#{esriVersion}',
+            debug: ('#{env}' === 'development' || window.location.href.indexOf('?debug=true') > -1)
+          }
+          require(['js/main'])
+        }
+      }
+
+  body.claro
+    script(src='http://js.arcgis.com/#{esriVersion}/init.js', async)
