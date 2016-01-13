@@ -74,7 +74,7 @@ gulp.task('stylus-build', function () {
   return gulp.src(config.stylusSrc, { base: config.src })
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(stylus({ includeCss: true }))
+    .pipe(stylus({ 'include css': true }))
     .pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.build))
@@ -83,7 +83,7 @@ gulp.task('stylus-build', function () {
 gulp.task('stylus-dist', function () {
   return gulp.src(config.stylusSrc, { base: config.src })
     .pipe(sourcemaps.init())
-    .pipe(stylus({ includeCss: true }))
+    .pipe(stylus({ 'include css': true, compress: true }))
     .pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.dist))
