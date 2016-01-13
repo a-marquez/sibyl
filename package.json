@@ -8,7 +8,7 @@
     "dist": "bower install && NODE_ENV=production gulp dist && r.js -o build.js",
     "deploy-gh-pages": "git subtree push --prefix dist origin gh-pages",
     "version": "npm run dist && git add dist",
-    "postversion": "npm run deploy-gh-pages",
+    "postversion": "git push --tags & npm run deploy-gh-pages",
     "install": "bower install"
   },
   "repository": {
