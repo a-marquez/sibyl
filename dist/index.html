@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sibyl v0.1.0</title>
+    <title>Sibyl v0.1.1</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <link rel="stylesheet" href="./css/app.css">
@@ -12,7 +12,7 @@
       var dojoConfig = {
         parseOnLoad: false,
         async: true,
-        cacheBust: 'v=v0.1.0',
+        cacheBust: 'v=v0.1.1',
         packages: [
           {name: 'js', location: base + 'js'},
           {name: 'app', location: base + 'js/app'},
@@ -35,7 +35,7 @@
         callback: function () {
           window.app = {
             env: 'production',
-            version: 'v0.1.0',
+            version: 'v0.1.1',
             esriVersion: '3.15',
             debug: ('production' === 'development' || window.location.href.indexOf('?debug=true') > -1)
           }
