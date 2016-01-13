@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "bower install & gulp watch serve",
-    "dist": "bower install && NODE_ENV=production gulp dist &&  r.js -o build.js",
+    "dist": "bower install && NODE_ENV=production gulp dist && r.js -o build.js",
+    "deploy-gh-pages": "git subtree push --prefix dist origin gh-pages",
+    "version": "npm run dist && git add dist",
+    "postversion": "npm run deploy-gh-pages",
     "install": "bower install"
   },
   "repository": {
@@ -27,9 +30,11 @@
     "bower": "^1.7.2",
     "browser-sync": "^2.11.0",
     "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.1",
     "gulp-jade": "^1.1.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.2.0",
     "gulp-umd": "^0.2.0",
     "node-notifier": "^4.4.0",

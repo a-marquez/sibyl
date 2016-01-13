@@ -4,7 +4,9 @@ var gulp = require('gulp'),
     babel = require('gulp-babel'),
     stylus = require('gulp-stylus'),
     notifier = require('node-notifier'),
+    sourcemaps = require('gulp-sourcemaps'),
     browserSync = require('browser-sync'),
+    autoprefixer = require('gulp-autoprefixer'),
     plumber = function () {
       return require('gulp-plumber')({
         errorHandler: function (error) {
@@ -58,7 +60,9 @@ gulp.task('jade-watch', ['jade-build'], function () {
 gulp.task('babel-build', function () {
   return gulp.src(config.babelSrc)
     .pipe(plumber())
+    .pipe(sourcemaps.init())
     .pipe(babel())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.build))
 })
 
@@ -69,13 +73,19 @@ gulp.task('babel-watch', ['babel-build'], function () {
 gulp.task('stylus-build', function () {
   return gulp.src(config.stylusSrc, { base: config.src })
     .pipe(plumber())
-    .pipe(stylus())
+    .pipe(sourcemaps.init())
+    .pipe(stylus({ includeCss: true }))
+    .pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.build))
 })
 
 gulp.task('stylus-dist', function () {
   return gulp.src(config.stylusSrc, { base: config.src })
-    .pipe(stylus())
+    .pipe(sourcemaps.init())
+    .pipe(stylus({ includeCss: true }))
+    .pipe(autoprefixer({ browsers: ['last 2 versions'], cascade: false }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.dist))
 })
 
@@ -85,20 +95,20 @@ gulp.task('stylus-watch', ['stylus-build'], function () {
 
 gulp.task('shim-babel-polyfill', function () {
   return gulp.src('build/vendor/babel-polyfill/browser-polyfill.js')
-          .pipe(umd({
-            exports: function () {return '_babelPolyfill'},
-            namespace: function () {return 'window._babelPolyfill'}
-          }))
-          .pipe(gulp.dest('build/shim/babel-polyfill/'))
+    .pipe(umd({
+      exports: function () { return '_babelPolyfill' },
+      namespace: function () { return 'window._babelPolyfill' }
+    }))
+    .pipe(gulp.dest('build/shim/babel-polyfill/'))
 })
 
 gulp.task('shim-fetch', function () {
   return gulp.src('build/vendor/fetch/fetch.js')
-          .pipe(umd({
-            exports: function () {return 'fetch'},
-            namespace: function () {return 'window.fetch'}
-          }))
-          .pipe(gulp.dest('build/shim/fetch/'))
+    .pipe(umd({
+      exports: function () { return 'fetch' },
+      namespace: function () { return 'window.fetch' }
+    }))
+    .pipe(gulp.dest('build/shim/fetch/'))
 })
 
 gulp.task('shim', ['shim-babel-polyfill', 'shim-fetch'])
@@ -116,11 +126,10 @@ gulp.task('serve', function () {
   });
 })
 
-
 // TODO:
 // - image optimization
-// - autoprefixing
 // - eslint
+// - prerender
 
 gulp.task('build', ['jade-build', 'babel-build', 'stylus-build', 'shim'])
 

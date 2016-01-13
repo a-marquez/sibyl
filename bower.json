@@ -11,6 +11,7 @@
     "alt": "~0.18.1",
     "react": "~0.14.6",
     "babel-polyfill": "~0.0.1",
-    "fetch": "~0.10.1"
+    "fetch": "~0.10.1",
+    "normalize-css": "~3.0.3"
   }
 }

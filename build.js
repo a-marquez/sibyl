@@ -2,6 +2,9 @@
   baseUrl: 'build/',
   name: 'js/main',
   out: 'dist/js/main.js',
+  optimize: 'uglify2',
+  generateSourceMaps: true,
+  preserveLicenseComments: false,
   paths: {
     // cdn
     'esri': 'empty:',
@@ -16,8 +19,8 @@
     'atoms': 'js/atoms',
     'components': 'js/components',
     'utils': 'js/utils',
+    'lib': 'lib',
     'shim': 'shim',
-    //'lib': 'lib'
 
     // vendor
     'alt': 'vendor/alt/dist/alt',
